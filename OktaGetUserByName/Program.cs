@@ -8,13 +8,15 @@
 // with a name that doesn't exist to handle failure.
 //
 
+using System.Collections.Generic;
+using System.Diagnostics;
 using Newtonsoft.Json.Linq;
 using Okta.Sdk.Api;
 using Okta.Sdk.Client;
 using Okta.Sdk.Model;
 
 const String oktaOrg = "https://pirates.potc.live";
-const String apiToken = "00DSpCgkwhdlHhxugvpF_yXpZwpkamtOslDhifc-L-";
+const String apiToken = "00BSGy0JazqN7hbyez1amAGi0x7JdBqRA_DoyVVxQ1";
 
 const String nameOne = "annebonny@potc.live";       // Existing login.
 const String nameTwo = "annebonny";                 // Existing login shortname.
@@ -31,6 +33,7 @@ config.Token = apiToken;
 
 AgentPoolsApi apiInstance = new AgentPoolsApi(config);
 UserApi userApi = new UserApi(config);
+GroupApi groupApi = new GroupApi(config);
 
 try {
 
@@ -46,11 +49,26 @@ try {
 
     Console.WriteLine(nameTwo + ", login: " + user.Profile.Login + ", id: " + user.Id);
 
-    // Get the existing user by IDe.
+    // Get the existing user by ID.
 
     user = await userApi.GetUserAsync(nameThree);
 
     Console.WriteLine(nameThree + ", login: " + user.Profile.Login + ", id: " + user.Id);
+
+    // Just for kicks get the groups for the user to show using the SDK.
+
+    List<Group> groups = await userApi.ListUserGroups(user.Id).ToListAsync();
+    int count = 0;
+
+    Console.Write("group membership: ");
+
+    foreach (Group group in groups) {
+
+        Console.Write(String.Format("{0}{1} ({2})", count > 0 ? ", " : "", group.Profile.Name, group.Id));
+        ++count;
+    }
+
+    Console.WriteLine();
 
     // Get the non-existant user (fails).
 

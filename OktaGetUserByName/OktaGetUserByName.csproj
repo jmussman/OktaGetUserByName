@@ -9,7 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="Okta.Sdk" Version="6.0.7" />
+    <PackageReference Include="Okta.Sdk" Version="6.0.11" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="7.0.0" />
   </ItemGroup>
 
 </Project>
