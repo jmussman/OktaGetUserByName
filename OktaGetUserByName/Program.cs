@@ -41,19 +41,19 @@ try {
 
     User user = await userApi.GetUserAsync(nameOne);
 
-    Console.WriteLine(nameOne + ", login: " + user.Profile.Login + ", id: " + user.Id);
+    Console.WriteLine(String.Format("{0}, login: {1}, id: {2}", nameOne, user.Profile.Login, user.Id));
 
     // Get the existing user by login shortname.
 
     user = await userApi.GetUserAsync(nameTwo);
 
-    Console.WriteLine(nameTwo + ", login: " + user.Profile.Login + ", id: " + user.Id);
+    Console.WriteLine(String.Format("{0}, login: {1}, id: {2}", nameTwo, user.Profile.Login, user.Id));
 
     // Get the existing user by ID.
 
     user = await userApi.GetUserAsync(nameThree);
 
-    Console.WriteLine(nameThree + ", login: " + user.Profile.Login + ", id: " + user.Id);
+    Console.WriteLine(String.Format("{0}, login: {1}, id: {2}", nameThree, user.Profile.Login, user.Id));
 
     // Just for kicks get the groups for the user to show using the SDK.
 
@@ -74,7 +74,7 @@ try {
 
     user = await userApi.GetUserAsync(nameFour);
 
-    Console.WriteLine(nameFour + ", id: " + user.Id);
+    Console.WriteLine(String.Format("{0}, login: {1}, id: {2}", nameFour, user.Profile.Login, user.Id));
 }
 
 catch (ApiException e) {
